@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscribe button and Calculator</title>
+</head>
+
+<body>
+  <p>YouTube Subscribe Button</p>
+  <button onclick="
+    subscribe();
+    " class="js-subscribe-button">Subscribe</button>
+
+
+  <p>Shipping Calculator</p>
+
+  <input type="number" placeholder="Cost of order" class="js-cost-input" onkeydown="
+     handleCostKeydown(event);
+     ">
+  <!--input is a void element i.e it no requires closing tag. HTML element for input text -->
+
+  <button onclick="
+    calculateTotal();
+    ">Calculate</button>
+
+  <p class="js-total-cost"></p>
+
+  <script>
+    
+
+    function handleCostKeydown(evnet) {
+      if (event.key === 'Enter') { //event does not exist inside this function, so we have to put the event object into the function as parameter
+        calculateTotal();
+      }
+    }
+
+
+
+    function calculateTotal() {
+      const inputElement = document.querySelector('.js-cost-input');
+
+      let cost = Number(inputElement.value); //iput.value gives text inside box in console
+
+      //JS have a NUMBER , which converts any value to number
+
+      //whenever we get the value from the DOM, it will be a string. To convert it to number we use NUMBER
+
+      if (cost < 40) {
+        cost = cost + 10; // here js thinks cost is string value. so it concatenates
+      }
+
+      document.querySelector('.js-total-cost').innerHTML = `Rupees ${cost}`;
+
+    }
+
+
+
+
+
+    function subscribe() {
+      const buttonElement = document.querySelector('.js-subscribe-button');
+      if (buttonElement.innerText === 'Subscribe') { //innerText is more useful than innerHTML bcz, Suppose if there is by mistake any spaces in button texts, then it will not run properly. So we use innerText.
+        buttonElement.innerHTML = 'Subscribed';
+      } else {
+        buttonElement.innerHTML = 'Subscribe';
+      }
+    }
+  </script>
+</body>
+
+</html>
